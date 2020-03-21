@@ -1,0 +1,691 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-login {
+    align-content: center;
+    align-self: center;
+    box-shadow: rgba(25, 25, 25, 0.5) 0px 4px 12px 0px;
+    background-color: white;
+    display: flex;
+    width: 23%;
+    /* max-height: 72%; */
+    border-radius: 10px;
+    padding: 4%;
+    flex-direction: column;
+}
+
+.form-login h1 {
+    font-family: "Roboto Mono", monospace;
+}
+
+.form-login button {
+    margin-top: 42px;
+    margin-bottom: 25px;
+    width: 129px;
+    height: 36px;
+    background-color: black;
+    color: white;
+    font-size: 22px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.form-register {
+    align-content: center;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-top: 20px;
+    width: 100%;
+}
+
+form input {
+    margin: 15px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: black;
+}
+
+button {
+    margin: 5px;
+}
+
+/* img {
+    max-width: 200px;
+    max-height: 200px;
+} */
+
+.header-welcome {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 3;
+    border-bottom: 1px solid rgb(242, 242, 242);
+}
+
+.header-welcome button {
+    margin-right: 35px;
+    width: 173px;
+    height: 42px;
+    background-color: black;
+    color: white;
+    font-size: 22px;
+}
+
+.welcome-container {
+    background-size: cover;
+    width: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: 800px;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+
+    background-color: #fafafa;
+    /* background-image: url(https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg); */
+}
+
+.message-container {
+    width: 100%;
+    min-height: 325px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    /* align-items: center; */
+    margin-left: 37px;
+    margin-right: 12px;
+}
+
+.message-container h1 {
+    font-family: "Roboto Mono", monospace;
+    font-size: 25px;
+    margin-left: 56px;
+}
+.message-container p {
+    font-family: "Roboto Mono", monospace;
+    font-size: 17px;
+    margin-left: 56px;
+}
+
+.image-container {
+    width: 90%;
+
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 83%;
+}
+
+.message-container button {
+    /* margin: 30px; */
+    width: 220px;
+    height: 42px;
+    background-color: black;
+    color: white;
+    font-size: 22px;
+    margin-left: 52px;
+}
+
+.logo {
+    font-family: "Work Sans";
+    margin-left: 39px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.container-register {
+    background-color: rgb(220, 235, 255);
+    /* background-image: url(https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg); */
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    justify-content: space-around;
+    text-align: center;
+    width: -webkit-fill-available;
+    background-position: center top;
+    background-repeat: no-repeat;
+    height: 700px;
+    background-color: #fafafa;
+}
+
+.form {
+    align-content: center;
+    align-self: center;
+    box-shadow: rgba(25, 25, 25, 0.5) 0px 4px 12px 0px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+
+    width: 23%;
+    /* max-height: 72%; */
+    border-radius: 10px;
+    padding: 4%;
+}
+
+.form button {
+    margin: 20px;
+}
+
+/* .imgprofile {
+    width: 110px;
+    height: 110px;
+} */
+
+.container-profile {
+    /* background-size: cover;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    min-height: 800px;
+    -webkit-box-pack: start;
+    justify-content: flex-start; */
+
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+    padding-right: 0.625rem;
+    padding-left: 0.625rem;
+
+    text-align: center;
+    top: 100px;
+    height: fit-content;
+    padding-top: 20px;
+    margin: auto;
+
+    text-align: center;
+    background-color: #fafafa;
+    /* filter: brightness(0.4); */
+    /* background-repeat: no-repeat; */
+}
+
+.container-profile h2 {
+    color: black;
+    font-family: "Roboto Mono";
+    margin: 20px;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    width: 57%;
+    text-align: center;
+    height: 82px;
+    margin-top: 118px;
+    background-color: rgb(249, 225, 164);
+    border-radius: 21px;
+}
+
+.users-container {
+    margin-top: 102px;
+    padding: 50px;
+
+    border-bottom: solid 1px;
+}
+.users-container span {
+    font-family: "Roboto Mono", monospace;
+    color: black;
+}
+
+.friends {
+    margin-top: 110px;
+}
+.image-pic {
+    width: 205px;
+    height: 205px;
+}
+
+.users-container input {
+    margin-left: 70px;
+    width: 220px;
+    height: 24px;
+    padding: 7px;
+}
+
+.users-container h2 {
+    color: white;
+}
+
+.image-card {
+    display: inline-block;
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    position: relative;
+    text-align: center;
+    position: relative;
+    margin: 8px;
+    padding: 5px;
+    text-align: center;
+}
+.image-card img {
+    border-radius: 2px;
+}
+
+.image-card p a {
+    font-family: "roboto mono";
+    text-decoration: none;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.imgprofile {
+    width: 216px;
+
+    /* display: block;
+    position: absolute; */
+
+    text-align: center;
+
+    /* padding-top: 168px; */
+}
+
+.gallery-em {
+    position: absolute;
+    /* top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px; */
+    z-index: 2;
+    background-color: transparent;
+    content: "";
+    transition: background-color 0.2s ease 0s;
+}
+
+.picbio img {
+    /* top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px; */
+
+    width: 250px;
+    height: 250px;
+    border-radius: 2px;
+}
+
+.button-img img {
+    width: 87px;
+    height: 87px;
+    border-radius: 50%;
+}
+
+.button-img {
+    padding: 10px;
+}
+
+.picbio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto Mono", monospace;
+    font-size: 20px;
+    padding-top: 52px;
+}
+
+.container-profile h2 {
+    font-family: "Roboto Mono";
+    font-size: 30px;
+    padding: 27px;
+    border-bottom: solid 1px;
+}
+
+.picbio .profilepic {
+}
+
+.Uploader {
+    border-radius: 7px;
+    padding: 20px;
+    box-shadow: 2px 7px 9px rgba(0, 0, 0, 0.21);
+    background-color: white;
+    position: absolute;
+    padding: 20px;
+    justify-content: center;
+    height: fit-content;
+    z-index: 9999;
+    width: 38%;
+    transition-delay: 3s;
+    transform: translateY(70%);
+    height: 300px;
+    left: 26%;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.9);
+    font-family: "Roboto Mono", monospace;
+}
+
+.Uploader button {
+    background-color: white;
+
+    color: black;
+
+    font-size: 17px;
+    width: 99px;
+    height: 24px;
+    margin-left: 25px;
+}
+.Uploader h3 {
+    text-align: center;
+    color: white;
+    font-size: 21px;
+}
+/* border-radius: 7px;
+padding: 20px;
+box-shadow: 2px 7px 9px rgba(0, 0, 0, 0.21);
+background-color: white;
+position: absolute;
+padding: 20px;
+justify-content: center;
+height: fit-content;
+z-index: 9999;
+width: 91%;
+height: 90%;
+left: 36px;
+top: 162px;
+display: flex;
+flex-direction: column; */
+button:hover {
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.21);
+}
+
+form {
+    display: flex;
+    /* flex-direction: row; */
+    /* justify-content: space-evenly; */
+    align-items: center;
+}
+
+.Uploader span {
+    color: white;
+
+    position: absolute;
+    top: 12px;
+    right: 13px;
+}
+
+.menu h1 {
+    font-family: "Roboto Mono";
+    font-size: 16px;
+}
+
+.menu a {
+    color: rgb(168, 168, 168);
+    text-decoration: none;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+}
+
+.logo a:hover {
+    cursor: pointer;
+}
+
+.logo a {
+    color: black;
+    text-decoration: none;
+}
+
+.users-container input {
+    width: 220px;
+    height: 30px;
+    border: solid black 1px;
+}
+
+.bio-btn button {
+    width: 80px;
+    height: 20px;
+    margin: 12px;
+}
+
+.bio-btn {
+    width: 300px;
+    height: 100px;
+    display: flex;
+
+    flex-direction: column;
+}
+
+.background-users {
+    background-color: #fafafa;
+    height: 700px;
+}
+
+.image-card p {
+    font-family: "roboto mono";
+    text-decoration: none;
+    color: black;
+}
+
+.friends-img {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: space-around;
+
+    position: relative;
+
+    padding: 5px;
+    text-align: center;
+}
+
+.friends h1 {
+    text-align: center;
+    font-family: "roboto mono";
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.friends h1 {
+    text-align: center;
+    font-family: "roboto mono";
+    border-bottom: solid black 2px;
+    left: 50%;
+}
+
+.friends {
+    margin-top: 102px;
+    padding: 20px;
+}
+
+.profilepic {
+    padding-top: 16px;
+
+    text-align: center;
+}
+
+.profile-list img {
+    width: 300px;
+    height: 300px;
+}
+
+.profile-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "roboto mono";
+    margin-top: 100px;
+    flex-direction: column;
+}
+
+.profile-list button {
+    background-color: black;
+    color: white;
+    width: 120px;
+    height: object-fit;
+}
+
+.chat-messages + textarea {
+    height: 107px;
+    width: 450px;
+    width: 61vw;
+
+    color: black;
+    border: 1px black;
+    font-size: 18px;
+    padding: 18px;
+    outline: none;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-bottom: 2px solid rgb(242, 242, 242);
+    border-left: 2px solid rgb(242, 242, 242);
+    border-right: 2px solid rgb(242, 242, 242);
+}
+
+.chat-messages img {
+    object-fit: cover;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    margin-right: 15px;
+}
+
+.chat-messages {
+    height: 300px;
+    /* width: 450px; */
+    width: 62vw;
+    padding: 10px;
+    overflow-y: scroll;
+
+    border: 2px solid rgb(242, 242, 242);
+}
+
+.chat-container {
+    width: fit-content;
+    height: fit-content;
+    /* margin-top: 218px; */
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.msg {
+    background-color: #fafafa;
+    border-radius: 9px;
+    margin: 16px;
+}
+
+.big-container {
+    display: flex;
+}
+
+.friendsonline img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.friends-online {
+    text-align: center;
+}
+
+.friends-online {
+    font-family: "Roboto Mono", monospace;
+}
+
+.online-container {
+    padding: 40px;
+    border: 1px solid rgb(242, 242, 242);
+    /* margin-top: 247px; */
+}
+
+.friendname {
+    text-align: center;
+
+    font-family: "Roboto Mono", monospace;
+}
+
+.chatroom h1 {
+    text-align: center;
+    font-family: "Roboto Mono", monospace;
+    padding: 41px;
+}
+
+.chatroom {
+    margin-top: 170px;
+}
+
+.Postpic {
+    border: 2px solid rgb(242, 242, 242);
+    padding: 10px;
+}
+
+.image-pic-post {
+    width: 205px;
+    height: 205px;
+    padding: 20px;
+}
+
+.uploaderpost button {
+}
+
+.btn-logout button {
+    background-color: black;
+    width: 80px;
+    height: 30px;
+    color: white;
+    font-size: 16px;
+}
+
+.btn-logout button:hover {
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.21);
+}
+
+.btn-logout {
+    margin-left: 10px;
+}
+
+.fav {
+    text-align: center;
+    font-family: "Roboto Mono", monospace;
+    font-size: 19px;
+    border: solid 1px;
+    padding: 5px;
+}
+
+.button-img {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user p {
+    font-family: "roboto mono";
+}
