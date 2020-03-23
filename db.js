@@ -214,11 +214,22 @@ exports.insertAnswers = function(
   answer1,
   answer2,
   answer3,
-  sentimentScore
+  sentimentRankrounded
 ) {
   return db.query(
     `INSERT INTO moods (user_id, answer_1, answer_2, answer_3, sentiment_score) VALUES ($1, $2, $3, $4, $5)
         RETURNING *`,
-    [userId, answer1, answer2, answer3, sentimentScore]
+    [userId, answer1, answer2, answer3, sentimentRankrounded]
+  );
+};
+
+exports.getSentimentRank = function(userId) {
+  return db.query(
+    `SELECT user_id, sentiment_score
+                FROM moods
+                WHERE user_id = $1
+                ORDER BY id DESC
+                LIMIT 1`,
+    [userId]
   );
 };

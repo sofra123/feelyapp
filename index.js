@@ -112,7 +112,6 @@ app.post("/createsentiment", function(req, res) {
     .then(response => {
       let firstresponse = response[0];
       let sentimentScore = firstresponse.documentSentiment.score;
-
       let sentimentRank = ((sentimentScore + 1) * 10) / 2;
       let sentimentRankrounded = Math.round(sentimentRank * 10) / 10;
 
@@ -121,7 +120,7 @@ app.post("/createsentiment", function(req, res) {
       console.log("sentimentRankrounded", sentimentRankrounded);
       ``;
 
-      db.insertAnswers(userId, answer1, answer2, answer3, sentimentScore)
+      db.insertAnswers(userId, answer1, answer2, answer3, sentimentRankrounded)
         .then(results => {
           res.json(results.rows[0]);
           console.log(results);
@@ -132,6 +131,19 @@ app.post("/createsentiment", function(req, res) {
             err
           );
         });
+    });
+});
+
+app.get("/getsentimentscore", (req, res) => {
+  console.log("getsentiment score index is running");
+  const userId = req.session.userId;
+  db.getSentimentRank(userId)
+    .then(results => {
+      console.log("results from getsentimentscore", results.rows[0]);
+      res.json(results.rows[0]);
+    })
+    .catch(err => {
+      console.log("index.js get /getimages catch err: ", err);
     });
 });
 

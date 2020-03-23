@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import Sentimentscore from "./sentimentscore";
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -77,6 +78,7 @@ export default class Form extends React.Component {
           <textarea onChange={this.handleAnswer3} />
           <button onClick={this.handleSubmit}>Analyze mood</button>
         </form>
+        <Sentimentscore Sentimentscore={this.Sentimentscore} />
       </div>
     );
   }
