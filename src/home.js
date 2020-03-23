@@ -7,32 +7,36 @@ import Resetpassword from "./resetpassword";
 import App from "./app";
 import Profilepic from "./profilepic";
 import Profile from "./profile";
+// import Bioeditor from "./bioeditor";
 
 export default function Home() {
-  return (
-    <div>
-      <div className="header-welcome">
-        <div className="logo">
-          <h1>Feely</h1>
+    return (
+        <div>
+            <div className="header-welcome">
+                <div className="logo">
+                    <h1>Artnet</h1>
+                </div>
+                <div className="button">
+                    <Link to="/registration">
+                        <button>get started</button>
+                    </Link>
+                </div>
+            </div>
+            <div className="welcome-container">
+                <div className="message-container">
+                    <h1>
+                        Artnet is the new network community for art lovers and
+                        artists.
+                    </h1>
+                    <p>Share your passion with other people.</p>
+                    <Link to="/registration">
+                        <button>Join us now</button>
+                    </Link>
+                </div>
+                <div className="image-container">
+                    <img src="/images/monaandvincent.png" alt="image" />
+                </div>
+            </div>
         </div>
-        <div className="button">
-          <Link to="/registration">
-            <button>get started</button>
-          </Link>
-        </div>
-      </div>
-      <div className="welcome-container">
-        <div className="message-container">
-          <h1>Track your mood and develop selfcare habits</h1>
-          <p> </p>
-          <Link to="/registration">
-            <button>Start now</button>
-          </Link>
-        </div>
-        <div className="image-container">
-          <img src="/images/monaandvincent.png" alt="image" />
-        </div>
-      </div>
-    </div>
-  );
+    );
 }

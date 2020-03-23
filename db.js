@@ -14,14 +14,6 @@ exports.addUser = function(first, last, email, password) {
   );
 };
 
-// exports.getUserData = function(userId) {
-//     return db.query(
-//         `SELECT first, last, email, password, age, city, url FROM users
-// LEFT JOIN user_profiles ON user_id = users.id WHERE user_id = $1`,
-//         [userId]
-//     );
-// };
-
 exports.getUser = function(email) {
   return db.query(`SELECT id, password FROM users WHERE email = $1 `, [email]);
 };
@@ -32,10 +24,6 @@ exports.updatePassword = function(email, password) {
     password
   ]);
 };
-
-// exports.verifyemail = function(email) {
-//     return db.query(`SELECT email FROM users WHERE email = $1 `, [email]);
-// };
 
 exports.insertsecret = function(code, email) {
   return db.query(
@@ -69,10 +57,168 @@ exports.insertImage = function(userId, url) {
   );
 };
 
-exports.insertQuestions = function(userId, questions) {
+exports.updateBio = function(userId, bio) {
   return db.query(
-    `INSERT INTO questions (userId, questions)
-        VALUES ($1, $2) RETURNING *`,
-    [userId, questions]
+    `UPDATE users SET bio = $2 WHERE id = $1 
+    RETURNING bio`,
+    [userId, bio]
+  );
+};
+
+exports.getLastUsers = function() {
+  return db.query(
+    `SELECT id, first, last, url
+            FROM users
+            ORDER BY id DESC
+            LIMIT 3`
+  );
+};
+
+exports.getMatchingUsers = function(val) {
+  return db.query(
+    `SELECT id, first, last, url
+            FROM users
+            WHERE first ILIKE $1`,
+    [val + "%"]
+  );
+};
+
+exports.getFriendshipStatus = function(receiver_id, sender_id) {
+  return db.query(
+    `SELECT * FROM friendships
+    WHERE (receiver_id = $1 AND sender_id = $2)
+    OR (receiver_id = $2 AND sender_id = $1)`,
+    [receiver_id, sender_id]
+  );
+};
+
+exports.sendFriendRequest = function(receiver_id, sender_id) {
+  return db.query(
+    `INSERT INTO friendships
+        (receiver_id, sender_id)
+         VALUES ($1, $2)`,
+    [receiver_id, sender_id]
+  );
+};
+
+exports.acceptFriendRequest = function(receiver_id, sender_id) {
+  return db.query(
+    `UPDATE friendships
+            SET accepted = true
+            WHERE (receiver_id = $1 AND sender_id = $2)
+            OR (sender_id = $1 AND receiver_id = $2)
+            RETURNING *`,
+    [receiver_id, sender_id]
+  );
+};
+
+exports.deleteFriendship = function(receiver_id, sender_id) {
+  return db.query(
+    `DELETE FROM friendships
+            WHERE (receiver_id = $1 AND sender_id = $2)
+            OR (sender_id = $1 AND receiver_id = $2)`,
+    [receiver_id, sender_id]
+  );
+};
+
+exports.getFriendsandWannabe = function(id) {
+  return db.query(
+    `SELECT users.id, first, last, url, accepted
+            FROM friendships
+            JOIN users
+            ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+            OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+            OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)`,
+    [id]
+  );
+};
+
+exports.getLastTenMessages = function() {
+  return db.query(
+    `SELECT chats.id, chats.message, chats.sender_id, chats.created_at, users.first, users.last, users.url
+FROM chats
+JOIN users
+ON chats.sender_id = users.id
+ORDER BY created_at DESC
+LIMIT 10`
+  );
+};
+
+exports.insertMessage = function(sender_id, msg) {
+  return db.query(
+    `INSERT INTO chats (sender_id, message)
+        VALUES ($1, $2)
+        RETURNING message`,
+    [sender_id, msg]
+  );
+};
+
+exports.getUserData = function(userId) {
+  return db.query(
+    `SELECT *
+            FROM users
+            WHERE id = $1`,
+    [userId]
+  );
+};
+
+exports.getUserData2 = function(userId) {
+  return db.query(
+    `SELECT first, last, url, bio, pictures.pic
+            FROM users
+            JOIN pictures 
+            ON user_id = users.id
+            WHERE id = $1`,
+    [userId]
+  );
+};
+
+exports.getUserDataOnlineUsers = function(arrayOfIds) {
+  return db.query(
+    `SELECT first, last, url
+            FROM users
+            WHERE id = ANY ($1)`,
+    [arrayOfIds]
+  );
+};
+
+exports.getJoinedUser = function(id) {
+  return db.query(
+    `SELECT first, last, url
+            FROM users
+            WHERE id = $1`,
+    [id]
+  );
+};
+
+exports.insertPic = function(userId, pic) {
+  return db.query(
+    `INSERT INTO pictures (user_id, pic) VALUES ($1, $2)
+        RETURNING *`,
+    [userId, pic]
+  );
+};
+
+exports.getImages = function(userId) {
+  return db.query(
+    `SELECT user_id, pic
+            FROM pictures
+            WHERE user_id = $1
+            LIMIT 5`,
+    [userId]
+  );
+};
+
+exports.insertAnswers = function(
+  userId,
+  answer1,
+  answer2,
+  answer3,
+  sentimentScore
+) {
+  return db.query(
+    `INSERT INTO moods (user_id, answer_1, answer_2, answer_3, sentiment_score) VALUES ($1, $2, $3, $4, $5)
+        RETURNING *`,
+    [userId, answer1, answer2, answer3, sentimentScore]
   );
 };

@@ -9,7 +9,7 @@ const db = require("./db");
 const cryptoRandomString = require("crypto-random-string");
 const ses = require("./ses.js");
 const s3 = require("./s3.js");
-
+const googlenaturallanguage = require("./googlenaturallanguage.js");
 const server = require("http").Server(app);
 const io = require("socket.io")(server, { origins: "localhost:8080" });
 
@@ -89,6 +89,50 @@ app.get("/welcome", function(req, res) {
   } else {
     res.sendFile(__dirname + "/index.html");
   }
+});
+
+app.get("/getsentiment", function(req, res) {
+  console.log("getsentiment");
+  googlenaturallanguage.quickstart().then(response => {
+    console.log("response from get sentiment index.js", res);
+    let firstresponse = response[0];
+    let sentimentScore = firstresponse.documentSentiment.score;
+  });
+});
+
+app.post("/createsentiment", function(req, res) {
+  console.log("getsentiment");
+  const { userId } = req.session;
+  const answer1 = req.body.answer_1;
+  const answer2 = req.body.answer_2;
+  const answer3 = req.body.answer_3;
+
+  googlenaturallanguage
+    .getSentimentScore(answer1, answer2, answer3)
+    .then(response => {
+      let firstresponse = response[0];
+      let sentimentScore = firstresponse.documentSentiment.score;
+
+      let sentimentRank = ((sentimentScore + 1) * 10) / 2;
+      let sentimentRankrounded = Math.round(sentimentRank * 10) / 10;
+
+      console.log("sentimentRank", sentimentRank);
+      console.log("sentimentscore", sentimentScore);
+      console.log("sentimentRankrounded", sentimentRankrounded);
+      ``;
+
+      db.insertAnswers(userId, answer1, answer2, answer3, sentimentScore)
+        .then(results => {
+          res.json(results.rows[0]);
+          console.log(results);
+        })
+        .catch(err => {
+          console.log(
+            "index.js POST /answers db.insertAnswers catch err: ",
+            err
+          );
+        });
+    });
 });
 
 app.post("/registration", (req, res) => {
@@ -265,9 +309,198 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
   }
 });
 
+app.post("/bio", (req, res) => {
+  const { userId } = req.session;
+  console.log("app post bioeditor is running");
+  console.log("req.body.bio ", req.body);
+  db.updateBio(userId, req.body.bio)
+    .then(results => {
+      // console.log(" results2: ", results.rows[0].bio);
+      res.json(results.rows[0]);
+    })
+    .catch(err => {
+      console.log("index.js POST /bio db.updateBio catch err: ", err);
+    });
+});
+
+app.get("/api/user/:id", (req, res) => {
+  const userId = req.session.userId;
+  console.log("userid", userId);
+  console.log("req.params.id", req.params.id);
+  if (req.params.id == userId) {
+    res.json({ redirectToProfile: true });
+  } else {
+    db.getUserData2(req.params.id)
+      .then(results => {
+        console.log("results from api/user:id", results.rows[0]);
+
+        res.json({
+          user: results.rows[0],
+          pictures: results.rows
+        });
+      })
+      .catch(err => {
+        console.log("index.js GET /user/:id db.getUserInfo catch err: ", err);
+        res.json({});
+      });
+  }
+});
+
+app.get("/lastusers", (req, res) => {
+  console.log("lastusers index is running");
+
+  db.getLastUsers()
+    .then(results => {
+      res.json(results);
+    })
+    .catch(err => {
+      console.log("index.js get /lastusers catch err: ", err);
+    });
+});
+
+app.get("/matchingusers/:matchingusers", (req, res) => {
+  console.log("matchingusers index is running");
+
+  db.getMatchingUsers(req.params.matchingusers)
+    .then(results => {
+      console.log("results from match users", results.rows);
+      res.json(results.rows);
+    })
+    .catch(err => {
+      console.log("index.js get /matchingusers catch err: ", err);
+    });
+});
+
+app.get("/api/friends/:id", (req, res) => {
+  const receiver = req.params.id;
+  const sender = req.session.userId;
+  db.getFriendshipStatus(receiver, sender)
+    .then(results => {
+      console.log("results from friends/:id", results);
+      res.json({
+        ownUserId: sender,
+        results
+      });
+    })
+    .catch(err => {
+      console.log("index.js GET /friends/:id db.getUserInfo catch err: ", err);
+    });
+});
+
+app.post("/api/friendshiprequest/:id", (req, res) => {
+  const receiver = req.params.id;
+  const sender = req.session.userId;
+  db.sendFriendRequest(receiver, sender)
+    .then(results => {
+      console.log("results from post friendshiprequest/:id", results);
+      res.json(results);
+    })
+    .catch(err => {
+      console.log("index.js POST /friends/:id db.getUserInfo catch err: ", err);
+    });
+});
+
+app.post("/acceptfriendship/:id", (req, res) => {
+  const receiver = req.params.id;
+  const sender = req.session.userId;
+  console.log("sender", sender);
+  console.log("receiver", receiver);
+  db.acceptFriendRequest(receiver, sender)
+    .then(results => {
+      console.log("results from post friends/:id", results);
+      res.json(receiver);
+    })
+    .catch(err => {
+      console.log("index.js POST /friends/:id db.getUserInfo catch err: ", err);
+    });
+});
+
+app.post("/deletefriendship/:id", (req, res) => {
+  const receiver = req.params.id;
+  const sender = req.session.userId;
+  db.deleteFriendship(receiver, sender)
+    .then(results => {
+      console.log("results from post friends/:id", results);
+      res.json(receiver);
+    })
+    .catch(err => {
+      console.log("index.js POST /friends/:id db.getUserInfo catch err: ", err);
+    });
+});
+
+app.get("/friends-wannabes", (req, res) => {
+  console.log("friends wannabes running");
+
+  db.getFriendsandWannabe(req.session.userId)
+    .then(results => {
+      console.log("friend and wannabe", results.rows);
+      res.json(results.rows);
+    })
+    .catch(err => {
+      console.log("index.js GET /friends and wannabe catch err: ", err);
+    });
+});
+
 app.get("/logout", (req, res) => {
   req.session.userId = null;
   res.sendStatus(200);
+});
+
+app.post("/uploadpic", uploader.single("file"), s3.upload, (req, res) => {
+  const { userId } = req.session;
+  console.log("input ", req.body);
+  console.log("file ", req.file);
+  console.log("POST request for /uploadpic ");
+  let pic = "https://s3.amazonaws.com/francybucket/" + req.file.filename;
+
+  if (req.file) {
+    db.insertPic(userId, pic)
+      .then(result => {
+        console.log("result in post uploadpic", result);
+        res.json({
+          success: true,
+          result
+        });
+      })
+      .catch(function(err) {
+        console.log("error in post uploadpic", err);
+      });
+  } else {
+    res.json({
+      success: false
+    });
+  }
+});
+
+app.get("/getimages", (req, res) => {
+  console.log("getimages index is running");
+  const userId = req.session.userId;
+  db.getImages(userId)
+    .then(results => {
+      console.log("--results--");
+
+      console.log(JSON.stringify(results));
+      res.json(results);
+    })
+    .catch(err => {
+      console.log("index.js get /getimages catch err: ", err);
+    });
+});
+
+app.post("/answers", (req, res) => {
+  console.log("app post form is running");
+  const { userId } = req.session;
+  const answer1 = req.body.answer_1;
+  const answer2 = req.body.answer_2;
+  const answer3 = req.body.answer_3;
+  db.insertAnswers(userId, answer1, answer2, answer3)
+    .then(results => {
+      res.json(results.rows[0]);
+      console.log(results);
+    })
+    .catch(err => {
+      console.log("index.js POST /answers db.insertAnswers catch err: ", err);
+    });
 });
 
 app.get("*", function(req, res) {
@@ -277,3 +510,104 @@ app.get("*", function(req, res) {
 server.listen(8080, function() {
   console.log("I'm listening.");
 });
+
+let onlineUsers = {};
+
+io.on("connection", function(socket) {
+  console.log(`socket with the id ${socket.id} is now connected`);
+  if (!socket.request.session.userId) {
+    return socket.disconnect(true);
+  }
+
+  const userId = socket.request.session.userId;
+
+  onlineUsers[socket.id] = userId;
+  Object.values(onlineUsers);
+  console.log("onlineusers", onlineUsers);
+
+  db.getLastTenMessages()
+    .then(data => {
+      // console.log("index.js io.on 'connection' GET  ", data);
+      io.sockets.emit("chatMessages", data.rows.reverse());
+    })
+    .catch(err => {
+      console.log("index.js io.on connection error", err);
+    });
+
+  socket.on("newMsg", msg => {
+    console.log("message received");
+    console.log(" message sent: ", msg);
+    console.log("userId in msg", userId);
+
+    db.insertMessage(userId, msg)
+      .then(data => {
+        console.log("index.js socket.on message ", data);
+
+        db.getUserData(userId)
+          .then(data => {
+            console.log("msg in userdata ", msg);
+            let objmsg = {
+              first: data.rows[0].first,
+              last: data.rows[0].last,
+              url: data.rows[0].url,
+              message: msg
+            };
+            console.log("first in getuserdata ", data.rows[0].first);
+
+            io.sockets.emit("chatMessage", objmsg);
+            console.log("objmsg", objmsg);
+          })
+          .catch();
+        // msg10.push({ message: msg });
+        // io.sockets.emit("chatMessages", msg10);
+      })
+      .catch(err => {
+        console.log("index.js socket.on catch err: ", err);
+      });
+  });
+});
+
+io.on("connection", function(socket) {
+  // let userId = socket.request.session.userId;
+  // // onlineUsers[socket.id] = userId;
+  // Object.values(onlineUsers);
+  // console.log("onlineUsersobj", onlineUsers);
+
+  // arrayOfIds = Object.values(onlineUsers);
+  const userId = socket.request.session.userId;
+
+  let arrayOfIds = [];
+  Object.entries(onlineUsers).map(onlineId => {
+    // check I need that in disconnect
+    arrayOfIds.push(onlineId[1]);
+  });
+  console.log("arrayOfIds", arrayOfIds);
+
+  db.getUserDataOnlineUsers(arrayOfIds).then(data => {
+    console.log("data in arrayOfId", data.rows);
+
+    io.sockets.emit("onlineUsers", data.rows);
+  });
+
+  // db.getJoinedUser(userId).then(result => {
+  //     socket.broadcast.emit("userJoined", result.rows[0]);
+
+  //     console.log("userswhojoined ", result.rows[0]);
+  // });
+
+  socket.on("disconnect", function() {
+    delete onlineUsers[socket.id];
+    io.sockets.emit("userLeft", userId);
+
+    db.getUserDataOnlineUsers(arrayOfIds).then(data => {
+      console.log("data in arrayOfId", data.rows);
+      io.sockets.emit("onlineUsers", data.rows);
+    });
+
+    console.log(`socket user id ${socket.id} is disconnected`);
+  });
+});
+
+// send back an array
+//put array in redux
+// socket.io events: one when user joins and one when user leaves
