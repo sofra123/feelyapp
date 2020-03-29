@@ -8,7 +8,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Profilepic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
-import Bioeditor from "./bioeditor";
 import Otherprofile from "./otherprofile";
 import Findpeople from "./findpeople";
 import Friends from "./friends";
@@ -16,13 +15,15 @@ import Chat from "./chat";
 import Onlineusers from "./onlineusers";
 import Favoriteartists from "./favoriteartists";
 import Form from "./form";
+import Chatbot from "./chatbot";
+import Sentimentchart from "./sentimentchart";
+import Dropdown from "./dropdown";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       uploaderVisible: false,
-      bio: "",
       pic: "dummyApp",
       uploaderPicVisible: false
     };
@@ -35,7 +36,6 @@ export default class App extends React.Component {
     this.hideUploader = this.hideUploader.bind(this);
     this.finishedUploading = this.finishedUploading.bind(this);
     this.finishedUploadingPic = this.finishedUploadingPic.bind(this);
-    this.setBio = this.setBio.bind(this);
     this.logout = this.logout.bind(this);
   }
 
@@ -47,14 +47,6 @@ export default class App extends React.Component {
     this.setState({
       uploaderVisible: true
     });
-  }
-
-  setBio(value) {
-    console.log("bio in app - ", value);
-    this.setState({
-      bio: value
-    });
-    //update in to database
   }
 
   logout() {
@@ -97,7 +89,7 @@ export default class App extends React.Component {
         first: data.first,
         last: data.last,
         url: data.url,
-        bio: data.bio,
+        // bio: data.bio,
         pic: data.pic
       });
     });
@@ -114,38 +106,13 @@ export default class App extends React.Component {
         <div className="header-welcome">
           <div className="logo">
             <a href="/">
-              <h1>Artnet</h1>
-            </a>
-          </div>
-          <div className="menu">
-            <a href="/users">
-              <h1>Find people</h1>
-            </a>
-          </div>
-          <div className="menu">
-            <a href="/friends-wannabe">
-              <h1>My Friends</h1>
-            </a>
-          </div>
-          <div className="menu">
-            <a href="/chat">
-              <h1>Chat</h1>
+              <h1>Feely</h1>
             </a>
           </div>
 
-          {/* <div>
-                        <button>Logout</button>
-                    </div> */}
           <div className="button-img">
-            <Profilepic url={this.state.url} />
-            {this.state.uploaderVisible && (
-              <Uploader
-                finishedUploading={this.finishedUploading}
-                hideUploader={this.hideUploader}
-              />
-            )}
-            <div className="btn-logout">
-              <button onClick={this.logout}>logout</button>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Dropdown />
             </div>
           </div>
         </div>
@@ -160,14 +127,6 @@ export default class App extends React.Component {
                   first={this.state.first}
                   last={this.state.last}
                   url={this.state.url}
-                  showUploader={this.showUploader}
-                  hideUploader={this.showUploader}
-                  bio={this.state.bio}
-                  setBio={this.setBio}
-                  pic={this.state.pic}
-                  finishedUploadingPic={this.finishedUploadingPic}
-                  showUploaderPic={this.showUploaderPic}
-                  hideUploaderPic={this.showUploaderPic}
                 />
               )}
             />
@@ -176,6 +135,8 @@ export default class App extends React.Component {
             <Route path="/friends-wannabe" component={Friends} />
             <Route path="/chat" component={Chat} />
             <Route path="/form" component={Form} />
+            <Route path="/chatbot" component={Chatbot} />
+            <Route path="/sentimentchart" component={Sentimentchart} />
           </div>
         </BrowserRouter>
       </div>

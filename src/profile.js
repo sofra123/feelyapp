@@ -1,54 +1,37 @@
 import React from "react";
 import Profilepic from "./profilepic";
-import Bioeditor from "./bioeditor";
 import Favoriteartists from "./favoriteartists";
 import Pictures from "./pictures";
+import { Link } from "react-router-dom";
 
 export default class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    // this.state = {};
+  }
 
-
-
-
-
-    render() {
-        return (
-            <div>
-                <div className="container-profile">
-                    <h2>Hello {this.props.first}</h2>
-                    <div className="picbio">
-                        <Profilepic
-                            // first={this.props.first}
-                            // last={this.props.last}
-                            url={this.props.url}
-                            showUploader={this.props.showUploader}
-                            hideUploader={this.props.hideUploader}
-                        />
-                       
-
-                        <Bioeditor
-                            bio={this.props.bio}
-                            setBio={this.props.setBio}
-                        />
-
-                        <Favoriteartists
-                            finishedUploadingPic={
-                                this.props.finishedUploadingPic
-                            }
-                            hideUploaderPic={this.props.hideUploaderPic}
-                        
-                        />
-                        <Pictures
-                            showUploaderPic={this.props.showUploaderPic}
-                            hideUploaderPic={this.props.hideUploaderPic}
-                            pic={this.props.pic}
-                        />
-                    </div>
-                </div>
+  render() {
+    return (
+      <div className="container-profile">
+        <h2>Hello {this.props.first}, how is your mood today?</h2>
+        <div className="container-box">
+          <Link to="/sentimentchart">
+            <div className="box">
+              <span>Check last 7 days moods</span>
             </div>
-        );
-    }
+          </Link>
+          <Link to="/chatbot">
+            <div className="box">
+              <span>Ask FeelyBot</span>
+            </div>
+          </Link>
+          <Link to="/form">
+            <div className="box">
+              <span>Gratitude Journal</span>
+            </div>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }

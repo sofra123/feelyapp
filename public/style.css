@@ -19,7 +19,7 @@ form {
 }
 
 .form-login h1 {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Poppins";
 }
 
 .form-login button {
@@ -49,8 +49,8 @@ body {
 }
 
 form input {
-  margin: 15px;
-  border-radius: 5px;
+  margin: 20px;
+  border-radius: 3px;
   height: 100%;
   width: 100%;
   color: black;
@@ -88,6 +88,8 @@ button {
   background-color: black;
   color: white;
   font-size: 22px;
+  font-size: 20px;
+  font-family: "Poppins";
 }
 
 .welcome-container {
@@ -101,7 +103,7 @@ button {
   justify-content: flex-start;
 
   background-color: #fafafa;
-  /* background-image: url(https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg); */
+  background-image: url(https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
 }
 
 .message-container {
@@ -118,29 +120,33 @@ button {
 }
 
 .message-container h1 {
-  font-family: "Roboto Mono", monospace;
-  font-size: 25px;
+  font-family: Poppins;
+  font-weight: bold;
+  font-size: 30px;
+
   margin-left: 56px;
 }
 .message-container p {
-  font-family: "Roboto Mono", monospace;
-  font-size: 17px;
+  font-family: Poppins;
+  font-weight: bold;
+
+  font-size: 18px;
   margin-left: 56px;
 }
 
 .image-container {
-  width: 90%;
-
+  width: 56%;
   display: flex;
   flex-direction: column;
   -webkit-box-pack: start;
   justify-content: flex-start;
   -webkit-box-align: center;
   align-items: center;
+  margin-right: 36px;
 }
 
 .image-container img {
-  width: 83%;
+  width: 70%;
 }
 
 .message-container button {
@@ -164,7 +170,7 @@ button:hover {
 
 .container-register {
   background-color: rgb(220, 235, 255);
-  /* background-image: url(https://visme.co/blog/wp-content/uploads/2017/07/50-Beautiful-and-Minimalist-Presentation-Backgrounds-03.jpg); */
+  background-image: url(https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -174,7 +180,7 @@ button:hover {
   width: -webkit-fill-available;
   background-position: center top;
   background-repeat: no-repeat;
-  height: 700px;
+  height: 795px;
   background-color: #fafafa;
 }
 
@@ -201,38 +207,33 @@ button:hover {
 } */
 
 .container-profile {
-  /* background-size: cover;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    min-height: 800px;
-    -webkit-box-pack: start;
-    justify-content: flex-start; */
-
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  min-height: 800px;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
   position: relative;
   flex-grow: 1;
   max-width: 100%;
-  padding-right: 0.625rem;
-  padding-left: 0.625rem;
-
+  background-image: url(https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
   text-align: center;
   top: 100px;
   height: fit-content;
   padding-top: 20px;
   margin: auto;
-
-  text-align: center;
-  background-color: #fafafa;
-  /* filter: brightness(0.4); */
-  /* background-repeat: no-repeat; */
 }
 
 .container-profile h2 {
   color: black;
-  font-family: "Roboto Mono";
+  font-family: "Poppins";
   margin: 20px;
+
+  font-size: 30px;
+  padding: 27px;
 }
 .profile {
   display: flex;
@@ -355,13 +356,6 @@ button {
   padding-top: 52px;
 }
 
-.container-profile h2 {
-  font-family: "Roboto Mono";
-  font-size: 30px;
-  padding: 27px;
-  border-bottom: solid 1px;
-}
-
 .picbio .profilepic {
 }
 
@@ -437,8 +431,9 @@ form {
 }
 
 .menu h1 {
-  font-family: "Roboto Mono";
+  font-family: "Poppins";
   font-size: 16px;
+  color: #f0c06e;
 }
 
 .menu a {
@@ -657,7 +652,7 @@ form {
 }
 
 .btn-logout button {
-  background-color: black;
+  background-color: #f0c06e;
   width: 80px;
   height: 30px;
   color: white;
@@ -682,6 +677,7 @@ form {
 
 .button-img {
   padding: 10px;
+  padding-right: 27px;
   display: flex;
   align-items: center;
 }
@@ -692,4 +688,287 @@ form {
 
 .formmood {
   margin-top: 200px;
+}
+
+.chatbot {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+}
+
+canvas {
+  display: block;
+  width: 754px;
+  height: 354px;
+  margin-top: 200px;
+}
+
+.container-box {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  position: absolute;
+  top: 200px;
+}
+
+.box {
+  position: relative;
+  background: white;
+  width: 300px;
+  height: 84px;
+  border-radius: 10px;
+  box-shadow: rgba(25, 25, 25, 0.5) 0px 4px 12px 0px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.box:hover {
+  cursor: pointer;
+}
+.box span {
+  font-family: "poppins";
+
+  font-size: 22px;
+}
+
+.container-box a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.box:hover {
+  transform: translateY(-10px);
+}
+
+.background {
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  min-height: 800px;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  position: relative;
+  flex-grow: 1;
+  max-width: 100%;
+  background-image: url(https://images.unsplash.com/photo-1531736275454-adc48d079ce9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  text-align: center;
+  top: 100px;
+  height: fit-content;
+  padding-top: 20px;
+  margin: auto;
+}
+
+.gratitude-form {
+  top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  flex-direction: column;
+}
+
+.smile {
+  font-family: "poppins";
+  font-size: 23px;
+}
+
+.gratitude {
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 300px;
+  font-family: "poppins";
+}
+
+li span {
+  font-family: "Caveat", cursive;
+  font-size: 25px;
+}
+
+li {
+  padding: 10px;
+}
+
+.gratitude-input input {
+  width: 396px;
+  height: 37px;
+}
+
+.gratitude-input form {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-evenly; */
+  align-items: center;
+}
+
+.gratitude-form ul,
+li {
+  list-style: none;
+}
+.gratitude-form ul {
+  overflow: hidden;
+  padding: 5em;
+}
+
+.gratitude-form ul li a {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 10em;
+  width: 10em;
+  padding: 1em;
+}
+.gratitude-form ul li {
+  margin: 1em;
+  float: left;
+}
+.gratitude-form ul li h2 {
+  font-size: 140%;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+.gratitude-form ul li p {
+  font-family: "Reenie Beanie", arial, sans-serif;
+  font-size: 180%;
+}
+.gratitude-form ul li:nth-child(even) {
+  -o-transform: rotate(4deg);
+  -webkit-transform: rotate(4deg);
+  -moz-transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+}
+.gratitude-form ul li:nth-child(3n) {
+  -o-transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+}
+.gratitude-form ul li:nth-child(5n) {
+  -o-transform: rotate(5deg);
+  -webkit-transform: rotate(5deg);
+  -moz-transform: rotate(5deg);
+  position: relative;
+  top: -10px;
+}
+.gratitude-form ul li {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 10em;
+  width: 10em;
+  padding: 1em;
+  -moz-box-shadow: 5px 5px 7px rgba(33, 33, 33, 1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  -moz-transition: -moz-transform 0.15s linear;
+  -o-transition: -o-transform 0.15s linear;
+  -webkit-transition: -webkit-transform 0.15s linear;
+}
+
+.gratitude-form ul li:nth-child(even) {
+  -o-transform: rotate(4deg);
+  -webkit-transform: rotate(4deg);
+  -moz-transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+  background: #cfc;
+}
+.gratitude-form ul li:nth-child(3n) {
+  -o-transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+  background: #ccf;
+}
+
+.Container-gratitude {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 13px;
+  background-color: whitesmoke;
+}
+
+.btn-gratitude {
+  width: 107px;
+  height: 38px;
+  font-family: "poppins";
+  font-size: 15px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  top: 45px;
+  right: 0px;
+  width: 200px;
+  background-color: white;
+  font-weight: bold;
+  position: absolute;
+
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown li a {
+  color: #000;
+  text-decoration: none;
+  font-family: "poppins";
+}
+.dropdown li {
+  padding: 8px 16px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.dropdown li:last-child {
+  border-bottom: none;
+}
+.dropdown li:hover {
+  background-color: #e5e5e5;
+  color: white;
+}
+.button {
+  width: 50px;
+  height: 18px;
+  background-color: black;
+  padding: 12px;
+  border-radius: 5px;
+  font-family: 1px;
+  font-family: "work sans";
+  color: white;
+}
+.button:before {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border: 10px solid;
+  border-color: white transparent transparent transparent;
+  right: 6px;
+  top: 18px;
+}
+
+.form-login a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
 }

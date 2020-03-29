@@ -223,13 +223,55 @@ exports.insertAnswers = function(
   );
 };
 
+exports.updateAnswers = function(
+  userId,
+  answer1,
+  answer2,
+  answer3,
+  sentimentRankrounded
+) {
+  return db.query(
+    `UPDATE moods SET user_id =$1, answer_1 = $2, answer_2 = $3 , answer_3 = $4, sentiment_score = $5 
+    WHERE moods.created_at > CURRENT_DATE
+          RETURNING *`,
+    [userId, answer1, answer2, answer3, sentimentRankrounded]
+  );
+};
+
 exports.getSentimentRank = function(userId) {
   return db.query(
-    `SELECT user_id, sentiment_score
+    `SELECT user_id, sentiment_score, created_at
                 FROM moods
                 WHERE user_id = $1
-                ORDER BY id DESC
-                LIMIT 1`,
+                AND created_at > current_date - interval '7 day'
+                ORDER BY created_at ASC
+                LIMIT 7`,
+    [userId]
+  );
+};
+
+exports.getCheckinStatus = function(userId) {
+  return db.query(
+    `SELECT * FROM moods
+    JOIN users
+    ON user_id = users.id
+    WHERE users.id = $1 AND moods.created_at > CURRENT_DATE `,
+    [userId]
+  );
+};
+
+exports.addGratitude = function(userId, gratitude) {
+  return db.query(
+    `INSERT INTO gratitudes (user_id, gratitude) VALUES ($1, $2)
+          RETURNING *`,
+    [userId, gratitude]
+  );
+};
+
+exports.getGratitude = function(userId) {
+  return db.query(
+    `SELECT user_id, gratitude, created_at from gratitudes
+              WHERE user_id = $1`,
     [userId]
   );
 };

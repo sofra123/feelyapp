@@ -118,19 +118,48 @@ app.post("/createsentiment", function(req, res) {
       console.log("sentimentRank", sentimentRank);
       console.log("sentimentscore", sentimentScore);
       console.log("sentimentRankrounded", sentimentRankrounded);
-      ``;
 
-      db.insertAnswers(userId, answer1, answer2, answer3, sentimentRankrounded)
-        .then(results => {
-          res.json(results.rows[0]);
-          console.log(results);
-        })
-        .catch(err => {
-          console.log(
-            "index.js POST /answers db.insertAnswers catch err: ",
-            err
-          );
-        });
+      db.getCheckinStatus(userId).then(results => {
+        console.log("results from checkinstatus", results);
+
+        if (results.rows.length == 0) {
+          db.insertAnswers(
+            userId,
+            answer1,
+            answer2,
+            answer3,
+            sentimentRankrounded
+          )
+            .then(results => {
+              res.json(results.rows[0]);
+              console.log(results);
+            })
+            .catch(err => {
+              console.log(
+                "index.js POST /answers db.insertAnswers catch err: ",
+                err
+              );
+            });
+        } else {
+          db.updateAnswers(
+            userId,
+            answer1,
+            answer2,
+            answer3,
+            sentimentRankrounded
+          )
+            .then(results => {
+              res.json(results.rows[0]);
+              console.log(results);
+            })
+            .catch(err => {
+              console.log(
+                "index.js POST /answers db.updateAnswers catch err: ",
+                err
+              );
+            });
+        }
+      });
     });
 });
 
@@ -139,8 +168,37 @@ app.get("/getsentimentscore", (req, res) => {
   const userId = req.session.userId;
   db.getSentimentRank(userId)
     .then(results => {
-      console.log("results from getsentimentscore", results.rows[0]);
+      console.log("results.rows[0] from getsentimentscore", results.rows[0]);
+      console.log("results from getsentimentscore", results);
+      res.json(results.rows);
+    })
+    .catch(err => {
+      console.log("index.js get /getimages catch err: ", err);
+    });
+});
+
+app.post("/gratitude", (req, res) => {
+  const { userId } = req.session;
+  console.log("app post gratitude is running");
+
+  db.addGratitude(userId, req.body.gratitude)
+    .then(results => {
+      console.log(" results.gratitude: ", results.rows[0]);
       res.json(results.rows[0]);
+    })
+    .catch(err => {
+      console.log("index.js POST /gratitude db.addGratitude catch err: ", err);
+    });
+});
+
+app.get("/getgratitude", (req, res) => {
+  console.log("getimages index is running");
+  const userId = req.session.userId;
+  db.getGratitude(userId)
+    .then(results => {
+      console.log("results from get gratitude", results);
+
+      res.json(results);
     })
     .catch(err => {
       console.log("index.js get /getimages catch err: ", err);

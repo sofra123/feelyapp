@@ -1,84 +1,77 @@
 import React from "react";
-import axios from "axios";
-import Sentimentscore from "./sentimentscore";
-
-export default class Form extends React.Component {
+import axios from "./axios";
+import Gratitudenote from "./gratitudinenote";
+export default class AddGratitude extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      answer_1: "",
-      answer_2: "",
-      answer_3: ""
-    };
+    this.state = { gratitude: "" };
 
-    this.handleAnswer1 = this.handleAnswer1.bind(this);
-    this.handleAnswer2 = this.handleAnswer2.bind(this);
-    this.handleAnswer3 = this.handleAnswer3.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  // componentDidMount() {
-  //   console.log("componentDidMount");
-  //   axios
-  //     .get("/getsentiment")
-  //     .then(response => {
-  //       console.log("form.js get sentiment then response: ", response);
-  //     })
-  //     .catch(err => {
-  //       console.log("form.js handleClick axios.post /form catch err: ", err);
-  //     });
-  // }
-
-  handleAnswer1(e) {
+  handleChange(e) {
     console.log(e.target.value, "e.target.value");
-    this.setState({ answer_1: e.target.value });
+    this.setState({ gratitude: e.target.value });
   }
 
-  handleAnswer2(e) {
-    console.log(e.target.value, "e.target.value");
-    this.setState({ answer_2: e.target.value });
-  }
-  handleAnswer3(e) {
-    console.log(e.target.value, "e.target.value");
-    this.setState({ answer_3: e.target.value });
-  }
+  handleSubmit() {
+    event.preventDefault();
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    let data = {
-      answer_1: this.state.answer_1,
-      answer_2: this.state.answer_2,
-      answer_3: this.state.answer_3
-    };
-
-    console.log("data", data);
+    const gratitude = this.state.gratitude;
+    console.log("inside handle function");
 
     axios
-      .post("/createsentiment", data)
+      .post("/gratitude", { gratitude: this.state.gratitude })
       .then(response => {
-        console.log("form.js handleSubmit then response: ", response);
-        console.log("data inside handlesubmit: ", data);
+        console.log(
+          "gratitude.js handleClick axios.post /bio then response: ",
+          response
+        );
+
+        this.setState({
+          sentimentScore: response.data.sentiment_score
+        });
+        console.log("gratitude inside handlesubmit: ", gratitude);
       })
       .catch(err => {
-        console.log("form.js handleClick axios.post /form catch err: ", err);
+        console.log(
+          "gratitude.js handleClick axios.post /bio catch err: ",
+          err
+        );
       });
+  }
+
+  getSentimentScore() {
+    return this.state.gratitude;
   }
 
   render() {
     return (
-      <div>
-        <form className="formmood">
-          <p>How are you today?</p>
-          <textarea onChange={this.handleAnswer1} />
-          <p>Have you been productive?</p>
-          <textarea onChange={this.handleAnswer2} />
-          <p>What is the most impactful thing you did or learn today?</p>
-          <textarea onChange={this.handleAnswer3} />
-          <button onClick={this.handleSubmit}>Analyze mood</button>
-        </form>
-        <Sentimentscore Sentimentscore={this.Sentimentscore} />
+      <div className="background">
+        <div className="Container-gratitude">
+          <div className="smileh1">
+            <h1 className="smile">What are you grateful for?</h1>
+          </div>
+          <div className="gratitude-input">
+            <form>
+              <input
+                type="text"
+                name="title"
+                placeholder="Type here your thoughts..."
+                value={this.gratitude}
+                onChange={this.handleChange}
+                required
+              />
+              <button className="btn-gratitude" onClick={this.handleSubmit}>
+                {" "}
+                Add{" "}
+              </button>
+            </form>
+          </div>
+        </div>
+        <Gratitudenote />
       </div>
     );
   }
