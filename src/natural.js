@@ -16,7 +16,7 @@ function getStringSentiment(string) {
 
 module.exports = {
   //returns the sentiment of a string on a scale from -1 to 1
-  getSentimentRank: function(emoji, ans1, ans2, ans3) {
+  getSentimentRank: function( ans1, ans2, ans3) {
     // let emojiRank = Number(emoji);
     let ans1Rank = getStringSentiment(ans1);
     let ans2Rank = getStringSentiment(ans2);
@@ -29,3 +29,7 @@ module.exports = {
     return sentimentRank;
   }
 };
+
+
+
+sentimentscore + 1 * 10 /2 

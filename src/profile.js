@@ -1,13 +1,10 @@
 import React from "react";
 import Profilepic from "./profilepic";
-import Favoriteartists from "./favoriteartists";
-import Pictures from "./pictures";
 import { Link } from "react-router-dom";
 
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {};
   }
 
   render() {

@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS gratitudes
-CASCADE;
+CASCADE
 
 CREATE TABLE gratitudes
 
