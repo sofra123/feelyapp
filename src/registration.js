@@ -29,7 +29,7 @@ export default class Registration extends React.Component {
     console.log(e.target.value, "e.target.value");
     this.setState(
       {
-        [e.target.name]: e.target.value //variable as property. works for all the inputs!!
+        [e.target.name]: e.target.value, //variable as property. works for all the inputs!!
       },
       () => console.log(this.state)
     ); // because I don´t want that the console.log happens before setState is done
@@ -39,7 +39,7 @@ export default class Registration extends React.Component {
     event.preventDefault();
 
     const userData = {
-      name: this.state
+      name: this.state,
     };
     console.log("userData", userData);
     if (
@@ -50,7 +50,7 @@ export default class Registration extends React.Component {
     ) {
       axios
         .post("./registration", { userData })
-        .then(res => {
+        .then((res) => {
           console.log("res", res);
           console.log("res.data", res.data);
           if (res.data.success) {
@@ -65,16 +65,6 @@ export default class Registration extends React.Component {
     } else {
       this.setState({ error: true });
     }
-
-    // if (!this.state.first) {
-    //     this.setState({ errorfirst: true });
-    // } else if (!this.state.last) {
-    //     this.setState({ errorlast: true });
-    // } else if (!this.state.email) {
-    //     this.setState({ erroremail: true });
-    // } else if (!this.state.password) {
-    //     this.setState({ errorpassword: true });
-    // }
   }
 
   render() {

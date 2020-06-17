@@ -5,7 +5,7 @@ export default class Dropdown extends React.Component {
     super();
 
     this.state = {
-      displayMenu: false
+      displayMenu: false,
     };
 
     this.showDropdownMenu = this.showDropdownMenu.bind(this);
@@ -27,7 +27,7 @@ export default class Dropdown extends React.Component {
 
   render() {
     return (
-      <div className="dropdown" style={{ background: "black", width: "97px" }}>
+      <div className="dropdown" style={{ background: "black", width: "110px" }}>
         <div className="button" onClick={this.showDropdownMenu}>
           {" "}
           Menu{" "}

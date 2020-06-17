@@ -4,10 +4,6 @@ var Analyzer = require("natural").SentimentAnalyzer;
 var stemmer = require("natural").PorterStemmer;
 var analyzer = new Analyzer("English", stemmer, "senticon");
 
-// const tokenizedString = tokenizer.tokenize("awlanesome");
-
-// console.log(analyzer.getSentiment(tokenizedString));
-
 //returns the sentiment of a string on a scale from -1 to 1
 function getStringSentiment(string) {
   const tokenizedString = tokenizer.tokenize(string);
@@ -16,7 +12,7 @@ function getStringSentiment(string) {
 
 module.exports = {
   //returns the sentiment of a string on a scale from -1 to 1
-  getSentimentRank: function( ans1, ans2, ans3) {
+  getSentimentRank: function(ans1, ans2, ans3) {
     // let emojiRank = Number(emoji);
     let ans1Rank = getStringSentiment(ans1);
     let ans2Rank = getStringSentiment(ans2);
@@ -27,9 +23,7 @@ module.exports = {
 
     console.log(sentimentRank);
     return sentimentRank;
-  }
+  },
 };
 
-
-
-sentimentscore + 1 * 10 /2 
+sentimentscore + (1 * 10) / 2;
