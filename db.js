@@ -2,7 +2,7 @@ const spicedPg = require("spiced-pg");
 
 const db = spicedPg(
   process.env.DATABASE_URL ||
-    "postgres://postgres:postgres@localhost:5432/users"
+    `postgres://postgres:postgres@localhost:5432/feely-app`
 );
 
 exports.addUser = function(first, last, email, password) {
@@ -21,7 +21,7 @@ exports.getUser = function(email) {
 exports.updatePassword = function(email, password) {
   return db.query(`UPDATE users SET password = $2 WHERE email = $1 `, [
     email,
-    password
+    password,
   ]);
 };
 
@@ -35,7 +35,7 @@ exports.insertsecret = function(code, email) {
 
 exports.getCode = function(code) {
   return db.query(`SELECT code FROM password_reset_codes WHERE code = $1 `, [
-    code
+    code,
   ]);
 };
 
@@ -188,24 +188,6 @@ exports.getJoinedUser = function(id) {
             FROM users
             WHERE id = $1`,
     [id]
-  );
-};
-
-exports.insertPic = function(userId, pic) {
-  return db.query(
-    `INSERT INTO pictures (user_id, pic) VALUES ($1, $2)
-        RETURNING *`,
-    [userId, pic]
-  );
-};
-
-exports.getImages = function(userId) {
-  return db.query(
-    `SELECT user_id, pic
-            FROM pictures
-            WHERE user_id = $1
-            LIMIT 5`,
-    [userId]
   );
 };
 
