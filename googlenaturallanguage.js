@@ -52,5 +52,3 @@ exports.getSentimentScore = (answer1, answer2, answer3) => {
 
   return client.analyzeSentiment({ document: document });
 };
-
-// quickstart().catch(console.error);
