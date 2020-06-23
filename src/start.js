@@ -13,7 +13,7 @@ import { createStore, applyMiddleware } from "redux";
 import reduxPromise from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reducer from "./reducer";
-import { init } from "./socket";
+// import { init } from "./socket";
 
 const store = createStore(
   reducer,
@@ -24,8 +24,8 @@ let component;
 if (location.pathname === "/welcome") {
   component = <Welcome />;
 } else {
-  console.log("calling init of socket. ");
-  init(store);
+  //   console.log("calling init of socket. ");
+  //   init(store);
 
   component = (
     <Provider store={store}>
