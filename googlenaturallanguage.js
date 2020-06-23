@@ -1,32 +1,13 @@
 // Imports the Google Cloud client library.
 const { Storage } = require("@google-cloud/storage");
 
-// Instantiates a client. Explicitly use service account credentials by
-// specifying the private key file. All clients in google-cloud-node have this
-// helper, see https://github.com/GoogleCloudPlaatform/google-cloud-node/blob/master/docs/authentication.md
 const projectId = "project-feely";
 const keyFilename =
   "/Users/francesca/Desktop/final-project/project-feely-6500b04512ac.json";
 const storage = new Storage({ projectId, keyFilename });
 
-// Makes an authenticated API request.
-// try {
-//   console.log("storage: " + storage);
-//   console.log("getBuckets:" + storage.getBuckets);
-//   const buckets = storage.getBuckets();
-
-//   if (!buckets) throw new Error("bucket not found");
-//   console.log("Buckets:" + buckets);
-//   buckets.forEach((bucket) => {
-//     console.log(bucket.name);
-//   });
-// } catch (err) {
-//   console.log("Buckets:");
-//   console.error("ERROR from googleapi:", err);
-//}
 async function listBuckets() {
   // Lists all buckets in the current project
-
   const [buckets] = await storage.getBuckets();
   console.log("Buckets:");
   buckets.forEach((bucket) => {

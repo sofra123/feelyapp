@@ -16,23 +16,22 @@ import reducer from "./reducer";
 import { init } from "./socket";
 
 const store = createStore(
-    reducer,
-    composeWithDevTools(applyMiddleware(reduxPromise))
+  reducer,
+  composeWithDevTools(applyMiddleware(reduxPromise))
 );
 
 let component;
 if (location.pathname === "/welcome") {
-    component = <Welcome />;
+  component = <Welcome />;
 } else {
-    console.log("calling init of socket. ");
-    init(store);
+  console.log("calling init of socket. ");
+  init(store);
 
-    component = (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    );
+  component = (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 }
 
 ReactDOM.render(component, document.querySelector("main"));
-

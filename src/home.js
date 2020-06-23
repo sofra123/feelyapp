@@ -5,7 +5,7 @@ import Registration from "./registration";
 import Login from "./login";
 import Resetpassword from "./resetpassword";
 import App from "./app";
-import Profilepic from "./profilepic";
+// import Profilepic from "./profilepic";
 import Profile from "./profile";
 
 export default function Home() {

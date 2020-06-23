@@ -4,12 +4,9 @@ import axios from "./axios";
 import { Link } from "react-router-dom";
 import { BrowserRouter, Route } from "react-router-dom";
 
-import Profilepic from "./profilepic";
-import Uploader from "./uploader";
 import Profile from "./profile";
-import Otherprofile from "./otherprofile";
-import Findpeople from "./findpeople";
-import Friends from "./friends";
+
+// import Friends from "./friends";
 
 import Form from "./form";
 import Chatbot from "./chatbot";
@@ -20,14 +17,31 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //   uploaderVisible: false,
       pic: "dummyApp",
+      //   uploaderPicVisible: false
     };
 
     console.log("props from app", props);
     console.log("this.state", this.state);
 
+    // this.showUploader = this.showUploader.bind(this);
+    // this.showUploaderPic = this.showUploader.bind(this);
+    // this.hideUploader = this.hideUploader.bind(this);
+    // this.finishedUploading = this.finishedUploading.bind(this);
+    // this.finishedUploadingPic = this.finishedUploadingPic.bind(this);
     this.logout = this.logout.bind(this);
   }
+
+  // Passes functions to ProfilePic and Uploader for making changes to its state
+
+  // get request to informations we have
+
+  //   showUploader() {
+  //     this.setState({
+  //       uploaderVisible: true
+  //     });
+  //   }
 
   logout() {
     axios.get("/logout").then(() => {
@@ -35,6 +49,30 @@ export default class App extends React.Component {
     });
     location.replace("/welcome");
   }
+
+  //   hideUploader() {
+  //     this.setState({
+  //       uploaderVisible: false
+  //     });
+  //     console.log("hideuploader");
+  //   }
+
+  //   showUploaderPic() {
+  //     this.setState({
+  //       uploaderPicVisible: true
+  //     });
+  //     console.log("hideuploader");
+  //   }
+
+  //   finishedUploading(newUrl) {
+  //     console.log("this.state after upload", this.state);
+  //     this.setState({ url: newUrl });
+  //   }
+
+  //   finishedUploadingPic(newPic) {
+  //     console.log("this.state after upload picture", this.state);
+  //     this.setState({ pic: newPic });
+  //   }
 
   componentDidMount() {
     console.log("componentDidMount");
@@ -45,6 +83,8 @@ export default class App extends React.Component {
         first: data.first,
         last: data.last,
         url: data.url,
+        // bio: data.bio,
+        pic: data.pic,
       });
     });
   }
@@ -84,6 +124,9 @@ export default class App extends React.Component {
                 />
               )}
             />
+            {/* <Route path="/user/:id" component={Otherprofile} />
+            <Route path="/users" component={Findpeople} />
+            <Route path="/friends-wannabe" component={Friends} /> */}
 
             <Route path="/form" component={Form} />
             <Route path="/chatbot" component={Chatbot} />

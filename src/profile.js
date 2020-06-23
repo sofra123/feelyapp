@@ -1,5 +1,4 @@
 import React from "react";
-import Profilepic from "./profilepic";
 import { Link } from "react-router-dom";
 
 export default class Profile extends React.Component {
