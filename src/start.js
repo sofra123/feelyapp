@@ -1,6 +1,6 @@
 import axios from "axios";
-import Welcome from "./Welcome"; //with default no need curly brackets
-import Registration from "./Registration";
+import Welcome from "./welcome"; //with default no need curly brackets
+import Registration from "./registration";
 
 // called only once
 
