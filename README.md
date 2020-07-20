@@ -1,6 +1,6 @@
 # Feely
 
-
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/55323904/87928579-54c6d780-ca85-11ea-8110-063a1247ae92.gif)
 ## Summary
 Feely is an application for tracking and improving daily mood built with React.js.
 
